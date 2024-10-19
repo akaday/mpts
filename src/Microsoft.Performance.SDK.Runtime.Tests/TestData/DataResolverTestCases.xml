@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataResolverTestCases>
+  <Assign>
+    <!--
+    The following outlines a Test Case for the DataSourceResolver.Assign method.
+    <TestCase Debug="True|False"
+              Description="The description of the test case. This value appears in the test result window."
+              Id="1">
+        Debug (boolean): When set to true and the Test is run under a debugger, then the Test method
+                         will break before executing the test defined in this element.
+        Description (string): A human readable description of the test case. This description will appear in the
+                              test results window as a row in the results.
+        Id (string): A unique Identifier for the test case. This makes finding failed tests easier.
+      <Parameters>
+        This element contains the parameters to pass to the Resolver.
+        <ProcessingSources>
+          This element contains a collection of zero (0) or more Processing Sources
+          to pass to the Assign method. Duplicates are allowed.
+          <ProcessingSource>
+            <Name>
+              The name to use to reference this processing source in 
+              the Expected section.
+            </Name>
+            <Supports>
+              This element contains a collection of zero (0) or more Data Sources
+              that are supported by the Processing Source.
+              <DataSource>
+                Place the name of the data source here.
+              </DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          This element contains a collection of zero (0) or more Data Sources
+          to pass to the Assign method. Duplicates are allowed. It is not required
+          that Data Sources referenced by Processing Sources appear here.
+          <DataSource>
+            Place the name of the Data Source here.
+          </DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        This element contains the expected results of a call to the Assign
+        method with the given parameters.
+        <ProcessingSourceAssignments>
+          This element contains a collection of zero (0) or more Assignments
+          that are expected as a result of running the Assign method. There
+          should be an entry for each Processing Source in the Parameters
+          section. See the specification of the Assign Method.
+          <Assignment>
+            <ProcessingSource>
+              The name of the Processing Source.
+            </ProcessingSource>
+            <DataSources>
+              This element contains a collection of zero (0) or more Data Sources
+              that are expected to be assigned to this Processing Source. The
+              Data Sources here MUST be present in the Data Sources element in the 
+              parameters section. Duplicates are not allowed.
+              <DataSource>
+                The name of the Data Source.
+              </DataSource>
+            </DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+    
+    -->
+    <TestCase Debug="False"
+              Description="Empty Parameters does nothing."
+              Id="1">
+      <Parameters>
+        <ProcessingSources></ProcessingSources>
+        <DataSources></DataSources>
+      </Parameters>
+      <Expected></Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Empty Processing Sources does nothing."
+              Id="2">
+      <Parameters>
+        <ProcessingSources></ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected></Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Empty Data Sources has all Processing Sources assigned."
+              Id="3">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources></DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources></DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="One Data Source Supported By One Processing Source."
+              Id="4">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+            <Supports>
+              <DataSource>1</DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources>
+              <DataSource>1</DataSource>
+            </DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="One Data Source Not Supported By Any Processing Source."
+              Id="5">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>2</Name>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>3</Name>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources></DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>2</ProcessingSource>
+            <DataSources></DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>3</ProcessingSource>
+            <DataSources></DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Multiple Processing Sources each supporting a Data Source."
+              Id="6">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+            <Supports>
+              <DataSource>1</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>2</Name>
+            <Supports>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>3</Name>
+            <Supports>
+              <DataSource>3</DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+          <DataSource>2</DataSource>
+          <DataSource>3</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources>
+              <DataSource>1</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>2</ProcessingSource>
+            <DataSources>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>3</ProcessingSource>
+            <DataSources>
+              <DataSource>3</DataSource>
+            </DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Unsupported Data Sources do not appear in assignment."
+              Id="7">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+            <Supports>
+              <DataSource>1</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>2</Name>
+            <Supports>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>3</Name>
+            <Supports>
+              <DataSource>3</DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+          <DataSource>2</DataSource>
+          <DataSource>3</DataSource>
+          <DataSource>4</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources>
+              <DataSource>1</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>2</ProcessingSource>
+            <DataSources>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>3</ProcessingSource>
+            <DataSources>
+              <DataSource>3</DataSource>
+            </DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Data Source supported by multiple Processing Sources appears in each list."
+              Id="8">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+            <Supports>
+              <DataSource>1</DataSource>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>2</Name>
+            <Supports>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>3</Name>
+            <Supports>
+              <DataSource>3</DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>1</DataSource>
+          <DataSource>2</DataSource>
+          <DataSource>3</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources>
+              <DataSource>1</DataSource>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>2</ProcessingSource>
+            <DataSources>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>3</ProcessingSource>
+            <DataSources>
+              <DataSource>3</DataSource>
+            </DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+    <TestCase Debug="False"
+              Description="Supported Data Source that is not supplied is okay."
+              Id="9">
+      <Parameters>
+        <ProcessingSources>
+          <ProcessingSource>
+            <Name>1</Name>
+            <Supports>
+              <DataSource>1</DataSource>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>2</Name>
+            <Supports>
+              <DataSource>2</DataSource>
+            </Supports>
+          </ProcessingSource>
+          <ProcessingSource>
+            <Name>3</Name>
+            <Supports>
+              <DataSource>3</DataSource>
+            </Supports>
+          </ProcessingSource>
+        </ProcessingSources>
+        <DataSources>
+          <DataSource>2</DataSource>
+        </DataSources>
+      </Parameters>
+      <Expected>
+        <ProcessingSourceAssignments>
+          <Assignment>
+            <ProcessingSource>1</ProcessingSource>
+            <DataSources>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>2</ProcessingSource>
+            <DataSources>
+              <DataSource>2</DataSource>
+            </DataSources>
+          </Assignment>
+          <Assignment>
+            <ProcessingSource>3</ProcessingSource>
+            <DataSources></DataSources>
+          </Assignment>
+        </ProcessingSourceAssignments>
+      </Expected>
+    </TestCase>
+
+  </Assign>
+</DataResolverTestCases>
