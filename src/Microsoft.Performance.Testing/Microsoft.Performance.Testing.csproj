@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Microsoft.Performance.Testing</AssemblyName>
+    <RootNamespace>Microsoft.Performance.Testing</RootNamespace>
+    <Authors>Microsoft</Authors>
+    <Company>Microsoft Corporation</Company>
+    <Product>Performance ToolKit</Product>
+    <Description>Contains test utilities.</Description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/microsoft/microsoft-performance-toolkit-sdk</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/microsoft/microsoft-performance-toolkit-sdk</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
